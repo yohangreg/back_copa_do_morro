@@ -8,14 +8,14 @@ import org.springframework.beans.BeanUtils;
 import java.util.Objects;
 
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "nome",nullable = false)
     private String name;
 
     @Column(nullable = false, unique = true)
