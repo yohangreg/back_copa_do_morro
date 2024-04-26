@@ -36,5 +36,6 @@ public class AuthService {
         } catch (BadCredentialsException e) {
             //TODO: LOGUIN OU SENHA INVALIDO
         }
+        return null;
     }
 }

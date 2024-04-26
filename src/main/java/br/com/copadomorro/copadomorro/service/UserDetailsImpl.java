@@ -1,23 +1,40 @@
 package br.com.copadomorro.copadomorro.service;
 
+import br.com.copadomorro.copadomorro.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class UserDetailsImpl implements UserDetails {
 
-    private Long id;
+    private final Long id;
 
-    private String name;
+    private final String name;
 
-    private String userName;
-
-    private String email;
+    private final String email;
 
     private String password;
+    private final Collection<? extends GrantedAuthority> authorities;
 
-    private Collection<? extends GrantedAuthority> authorities;
+    public UserDetailsImpl(Long id, String name, String email,
+                           Collection<? extends GrantedAuthority> authorities) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.authorities = authorities;
+    }
+
+    public static UserDetailsImpl build(User user) {
+
+        return new UserDetailsImpl(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                new ArrayList<>());
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -31,7 +48,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return email;
     }
 
     @Override
