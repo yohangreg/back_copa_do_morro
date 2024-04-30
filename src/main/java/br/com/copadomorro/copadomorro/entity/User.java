@@ -3,9 +3,9 @@ package br.com.copadomorro.copadomorro.entity;
 import br.com.copadomorro.copadomorro.dto.UserDTO;
 import br.com.copadomorro.copadomorro.entity.enums.TypeUserEnum;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.BeanUtils;
-
-import java.util.Objects;
 
 @Entity
 @Table(name = "user")
@@ -15,29 +15,29 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome",nullable = false)
+    @Column(name = "nome")
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "password_hash", nullable = false)
+    @Column(name = "password_hash")
     private String password;
 
+    @Column(name = "cpf")
     private String cpf;
 
+    @Column(name = "cnpj")
     private String cnpj;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TypeUserEnum type;
+    @Column(name = "type")
+    private String type;
 
     public User(UserDTO userDTO) {
         BeanUtils.copyProperties(userDTO, this);
     }
 
     public User() {
-
     }
 
     public Long getId() {
@@ -88,23 +88,11 @@ public class User {
         this.cnpj = cnpj;
     }
 
-    public TypeUserEnum getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(TypeUserEnum type) {
+    public void setType(String type) {
         this.type = type;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User user)) return false;
-        return Objects.equals(getId(), user.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
     }
 }

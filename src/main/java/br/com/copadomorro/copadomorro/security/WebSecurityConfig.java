@@ -39,7 +39,8 @@ public class WebSecurityConfig {
         httpSecurity.cors(Customizer.withDefaults())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll()
+                                                .requestMatchers("/users/**").permitAll());
         //httpSecurity.csrf(csrf -> csrf.disable())
 
         return httpSecurity.build();

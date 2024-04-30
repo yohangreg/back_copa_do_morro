@@ -1,6 +1,6 @@
 package br.com.copadomorro.copadomorro.security.jwt;
 
-import br.com.copadomorro.copadomorro.service.UserDetailsImpl;
+import br.com.copadomorro.copadomorro.entity.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -20,8 +20,11 @@ public class JwtUtils {
     @Value("${projeto.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-    public String generateTokenFromUserDetailsImpl(UserDetailsImpl userDatail) {
-        return Jwts.builder().setSubject(userDatail.getUsername()).setIssuedAt(new Date()).setExpiration(new Date(new Date().getTime() + jwtExpirationMs)).signWith(getSigninKey(), SignatureAlgorithm.ES512).compact();
+    public String generateTokenFromUserDetailsImpl(UserDetailsImpl userDetail) {
+        return Jwts.builder().setSubject(userDetail.getUsername())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(new Date().getTime() + jwtExpirationMs))
+                .signWith(getSigninKey(), SignatureAlgorithm.HS512).compact();
     }
 
     public Key getSigninKey() {

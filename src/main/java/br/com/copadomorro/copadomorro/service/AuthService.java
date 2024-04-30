@@ -2,6 +2,7 @@ package br.com.copadomorro.copadomorro.service;
 
 import br.com.copadomorro.copadomorro.dto.AcessDTO;
 import br.com.copadomorro.copadomorro.dto.AuthenticationDTO;
+import br.com.copadomorro.copadomorro.entity.UserDetailsImpl;
 import br.com.copadomorro.copadomorro.security.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

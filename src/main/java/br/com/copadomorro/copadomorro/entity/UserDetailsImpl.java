@@ -1,6 +1,5 @@
-package br.com.copadomorro.copadomorro.service;
+package br.com.copadomorro.copadomorro.entity;
 
-import br.com.copadomorro.copadomorro.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -70,4 +69,6 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
+
