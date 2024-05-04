@@ -17,12 +17,13 @@ public class UserDetailsImpl implements UserDetails {
     private String password;
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String name, String email,
+    public UserDetailsImpl(Long id, String name, String email, String password,
                            Collection<? extends GrantedAuthority> authorities) {
         super();
         this.id = id;
         this.name = name;
         this.email = email;
+        this.password = password;
         this.authorities = authorities;
     }
 
@@ -32,6 +33,7 @@ public class UserDetailsImpl implements UserDetails {
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
+                user.getPassword(),
                 new ArrayList<>());
     }
 

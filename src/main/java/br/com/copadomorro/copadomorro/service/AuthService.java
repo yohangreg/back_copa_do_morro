@@ -16,6 +16,8 @@ public class AuthService {
 
     @Autowired
     private JwtUtils jwtUtils;
+
+    @Autowired
     private AuthenticationManager authenticationManager;
     public AcessDTO login(AuthenticationDTO authDto) {
 
@@ -37,6 +39,6 @@ public class AuthService {
         } catch (BadCredentialsException e) {
             //TODO: LOGUIN OU SENHA INVALIDO
         }
-        return null;
+        return new AcessDTO("Acesso negado");
     }
 }

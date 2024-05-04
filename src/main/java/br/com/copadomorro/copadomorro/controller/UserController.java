@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/user")
 @CrossOrigin
 public class UserController {
 

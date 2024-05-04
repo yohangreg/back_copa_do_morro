@@ -1,6 +1,7 @@
 package br.com.copadomorro.copadomorro.security;
 
 import br.com.copadomorro.copadomorro.security.jwt.AuthEntryPointJwt;
+import br.com.copadomorro.copadomorro.security.jwt.AuthFilterToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.net.http.HttpClient;
 
@@ -34,14 +36,23 @@ public class WebSecurityConfig {
     }
 
     @Bean
+    public AuthFilterToken authFilterToken() {
+        return new AuthFilterToken();
+    }
+
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity.cors(Customizer.withDefaults())
+        httpSecurity.cors(Customizer.withDefaults());
+        httpSecurity.csrf(csrf -> csrf.disable())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll()
-                                                .requestMatchers("/users/**").permitAll());
-        //httpSecurity.csrf(csrf -> csrf.disable())
+                        .requestMatchers("/user/**").permitAll()
+                        .anyRequest().authenticated());
+
+        httpSecurity.addFilterBefore(authFilterToken(), UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
     }

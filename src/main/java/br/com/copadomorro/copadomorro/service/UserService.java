@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -18,10 +19,15 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public void insert(UserDTO userDTO) {
+    public UserDTO insert(UserDTO userDTO) {
+        validateUser(userDTO);
         User user = new User(userDTO);
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        if (savedUser == null) {
+            throw new RuntimeException("Error creating new user");
+        }
+        return new UserDTO(savedUser);
     }
 
     public List<UserDTO> findAll(){
@@ -46,5 +52,26 @@ public class UserService {
 
     public UserDTO findByEmail(String email) {
         return new UserDTO(userRepository.findByEmail(email).get());
+    }
+
+    private void validateUser(UserDTO user) {
+        if (user == null || hasInvalidField(user)) {
+            throw new IllegalArgumentException("Invalid user data");
+        }
+    }
+
+    private boolean hasInvalidField(UserDTO userDTO) {
+        if (isNullOrEmpty(userDTO.getName())
+            || isNullOrEmpty(userDTO.getEmail())
+            || isNullOrEmpty(userDTO.getPassword())
+            || isNullOrEmpty(userDTO.getType())
+            || (isNullOrEmpty(userDTO.getCnpj()) && isNullOrEmpty(userDTO.getCpf()))) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isNullOrEmpty(String str) {
+        return str == null || str.trim().isEmpty();
     }
 }
