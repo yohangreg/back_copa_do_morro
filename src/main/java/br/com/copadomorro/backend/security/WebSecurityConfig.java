@@ -1,7 +1,7 @@
-package br.com.copadomorro.copadomorro.security;
+package br.com.copadomorro.backend.security;
 
-import br.com.copadomorro.copadomorro.security.jwt.AuthEntryPointJwt;
-import br.com.copadomorro.copadomorro.security.jwt.AuthFilterToken;
+import br.com.copadomorro.backend.security.jwt.AuthEntryPointJwt;
+import br.com.copadomorro.backend.security.jwt.AuthFilterToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import java.net.http.HttpClient;
 
 @Configuration
 @EnableMethodSecurity

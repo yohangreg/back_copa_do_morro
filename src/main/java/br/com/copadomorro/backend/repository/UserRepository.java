@@ -1,6 +1,6 @@
-package br.com.copadomorro.copadomorro.repository;
+package br.com.copadomorro.backend.repository;
 
-import br.com.copadomorro.copadomorro.entity.User;
+import br.com.copadomorro.backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

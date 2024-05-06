@@ -1,4 +1,4 @@
-package br.com.copadomorro.copadomorro.entity;
+package br.com.copadomorro.backend.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

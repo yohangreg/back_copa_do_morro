@@ -1,10 +1,9 @@
-package br.com.copadomorro.copadomorro.controller;
+package br.com.copadomorro.backend.controller;
 
-import br.com.copadomorro.copadomorro.dto.UserDTO;
-import br.com.copadomorro.copadomorro.dto.UserViewDTO;
-import br.com.copadomorro.copadomorro.entity.User;
-import br.com.copadomorro.copadomorro.exceptions.UserServiceException;
-import br.com.copadomorro.copadomorro.service.UserService;
+import br.com.copadomorro.backend.dto.UserDTO;
+import br.com.copadomorro.backend.dto.UserViewDTO;
+import br.com.copadomorro.backend.exceptions.UserServiceException;
+import br.com.copadomorro.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

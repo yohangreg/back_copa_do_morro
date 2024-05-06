@@ -1,4 +1,4 @@
-package br.com.copadomorro.copadomorro.entity.enums;
+package br.com.copadomorro.backend.entity.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

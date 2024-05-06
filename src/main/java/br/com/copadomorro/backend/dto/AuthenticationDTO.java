@@ -1,4 +1,4 @@
-package br.com.copadomorro.copadomorro.dto;
+package br.com.copadomorro.backend.dto;
 
 public class AuthenticationDTO {
 

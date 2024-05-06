@@ -1,10 +1,7 @@
-package br.com.copadomorro.copadomorro.entity;
+package br.com.copadomorro.backend.entity;
 
-import br.com.copadomorro.copadomorro.dto.UserDTO;
-import br.com.copadomorro.copadomorro.entity.enums.TypeUserEnum;
+import br.com.copadomorro.backend.dto.UserDTO;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
 @Entity

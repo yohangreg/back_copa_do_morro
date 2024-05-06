@@ -1,9 +1,9 @@
-package br.com.copadomorro.copadomorro.service;
+package br.com.copadomorro.backend.service;
 
-import br.com.copadomorro.copadomorro.dto.AcessDTO;
-import br.com.copadomorro.copadomorro.dto.AuthenticationDTO;
-import br.com.copadomorro.copadomorro.entity.UserDetailsImpl;
-import br.com.copadomorro.copadomorro.security.jwt.JwtUtils;
+import br.com.copadomorro.backend.dto.AcessDTO;
+import br.com.copadomorro.backend.dto.AuthenticationDTO;
+import br.com.copadomorro.backend.entity.UserDetailsImpl;
+import br.com.copadomorro.backend.security.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;

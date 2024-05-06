@@ -1,8 +1,8 @@
-package br.com.copadomorro.copadomorro.service;
+package br.com.copadomorro.backend.service;
 
-import br.com.copadomorro.copadomorro.entity.User;
-import br.com.copadomorro.copadomorro.entity.UserDetailsImpl;
-import br.com.copadomorro.copadomorro.repository.UserRepository;
+import br.com.copadomorro.backend.entity.User;
+import br.com.copadomorro.backend.entity.UserDetailsImpl;
+import br.com.copadomorro.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

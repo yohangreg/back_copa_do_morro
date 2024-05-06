@@ -1,4 +1,4 @@
-package br.com.copadomorro.copadomorro.controller;
+package br.com.copadomorro.backend.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;

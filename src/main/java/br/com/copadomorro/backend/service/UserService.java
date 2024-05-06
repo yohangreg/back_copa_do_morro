@@ -1,16 +1,15 @@
-package br.com.copadomorro.copadomorro.service;
+package br.com.copadomorro.backend.service;
 
-import br.com.copadomorro.copadomorro.dto.UserDTO;
-import br.com.copadomorro.copadomorro.dto.UserViewDTO;
-import br.com.copadomorro.copadomorro.entity.User;
-import br.com.copadomorro.copadomorro.exceptions.UserServiceException;
-import br.com.copadomorro.copadomorro.repository.UserRepository;
+import br.com.copadomorro.backend.dto.UserDTO;
+import br.com.copadomorro.backend.dto.UserViewDTO;
+import br.com.copadomorro.backend.entity.User;
+import br.com.copadomorro.backend.exceptions.UserServiceException;
+import br.com.copadomorro.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

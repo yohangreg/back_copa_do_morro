@@ -1,4 +1,4 @@
-package br.com.copadomorro.copadomorro;
+package br.com.copadomorro.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

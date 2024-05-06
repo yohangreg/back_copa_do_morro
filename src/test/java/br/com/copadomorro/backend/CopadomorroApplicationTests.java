@@ -1,4 +1,4 @@
-package br.com.copadomorro.copadomorro;
+package br.com.copadomorro.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

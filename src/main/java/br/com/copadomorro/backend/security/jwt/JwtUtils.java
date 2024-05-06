@@ -1,6 +1,6 @@
-package br.com.copadomorro.copadomorro.security.jwt;
+package br.com.copadomorro.backend.security.jwt;
 
-import br.com.copadomorro.copadomorro.entity.UserDetailsImpl;
+import br.com.copadomorro.backend.entity.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

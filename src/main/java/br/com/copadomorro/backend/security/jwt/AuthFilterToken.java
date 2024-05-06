@@ -1,8 +1,8 @@
-package br.com.copadomorro.copadomorro.security.jwt;
+package br.com.copadomorro.backend.security.jwt;
 
 import java.io.IOException;
 
-import br.com.copadomorro.copadomorro.service.UserDetailServiceImpl;
+import br.com.copadomorro.backend.service.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

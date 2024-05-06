@@ -1,6 +1,6 @@
-package br.com.copadomorro.copadomorro.dto;
+package br.com.copadomorro.backend.dto;
 
-import br.com.copadomorro.copadomorro.entity.User;
+import br.com.copadomorro.backend.entity.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.beans.BeanUtils;
 

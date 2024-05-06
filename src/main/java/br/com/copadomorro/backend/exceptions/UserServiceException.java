@@ -1,4 +1,4 @@
-package br.com.copadomorro.copadomorro.exceptions;
+package br.com.copadomorro.backend.exceptions;
 
 public class UserServiceException extends RuntimeException {
 

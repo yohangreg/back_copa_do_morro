@@ -1,13 +1,6 @@
-package br.com.copadomorro.copadomorro.dto;
+package br.com.copadomorro.backend.dto;
 
-import br.com.copadomorro.copadomorro.entity.User;
-import br.com.copadomorro.copadomorro.entity.enums.TypeUserEnum;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import br.com.copadomorro.backend.entity.User;
 import org.springframework.beans.BeanUtils;
 
 public class UserDTO {

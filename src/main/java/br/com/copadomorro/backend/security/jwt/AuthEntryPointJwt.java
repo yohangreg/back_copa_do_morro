@@ -1,4 +1,4 @@
-package br.com.copadomorro.copadomorro.security.jwt;
+package br.com.copadomorro.backend.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
