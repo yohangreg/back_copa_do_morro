@@ -1,7 +1,9 @@
 package br.com.copadomorro.copadomorro.controller;
 
+import br.com.copadomorro.copadomorro.dto.AcessDTO;
 import br.com.copadomorro.copadomorro.dto.AuthenticationDTO;
 import br.com.copadomorro.copadomorro.dto.UserDTO;
+import br.com.copadomorro.copadomorro.dto.UserViewDTO;
 import br.com.copadomorro.copadomorro.service.AuthService;
 import br.com.copadomorro.copadomorro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +22,28 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/createUser")
+    @PostMapping(value = "/SingUp")
     public ResponseEntity<?> insertNewUser(@RequestBody UserDTO newUser) {
         try {
-            UserDTO userInsert = userService.insert(newUser);
-            return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+            UserViewDTO userInsert = userService.insert(newUser);
+            return ResponseEntity.status(HttpStatus.CREATED).body(userInsert);
         } catch (IllegalArgumentException ex) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage() + " " + ex.getCause());
         } catch (RuntimeException ex) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage() + " " + ex.getCause());
         }
     }
 
     @PostMapping(value = "/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationDTO authDto) {
-        return ResponseEntity.ok(authService.login(authDto));
+        try {
+            AcessDTO token = authService.login(authDto);
+            return ResponseEntity.status(HttpStatus.OK).body(token);
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage() + " " + ex.getCause());
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage() + " " + ex.getCause());
+        }
     }
 
 }

@@ -1,43 +1,20 @@
-package br.com.copadomorro.copadomorro.entity;
+package br.com.copadomorro.copadomorro.dto;
 
-import br.com.copadomorro.copadomorro.dto.UserDTO;
-import br.com.copadomorro.copadomorro.entity.enums.TypeUserEnum;
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import br.com.copadomorro.copadomorro.entity.User;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.beans.BeanUtils;
 
-@Entity
-@Table(name = "users")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+public class UserViewDTO {
     private Long id;
-
-    @Column(name = "nome")
     private String name;
-
-    @Column(name = "email", unique = true)
     private String email;
-
-    @Column(name = "password_hash")
-    private String password;
-
-    @Column(name = "cpf")
     private String cpf;
-
-    @Column(name = "cnpj")
     private String cnpj;
-
-    @Column(name = "type")
     private String type;
 
-    public User(UserDTO userDTO) {
-        BeanUtils.copyProperties(userDTO, this);
-    }
-
-    public User() {
+    public UserViewDTO(User user) {
+        BeanUtils.copyProperties(user, this);
     }
 
     public Long getId() {
@@ -62,14 +39,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getCpf() {

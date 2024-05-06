@@ -1,7 +1,9 @@
 package br.com.copadomorro.copadomorro.service;
 
 import br.com.copadomorro.copadomorro.dto.UserDTO;
+import br.com.copadomorro.copadomorro.dto.UserViewDTO;
 import br.com.copadomorro.copadomorro.entity.User;
+import br.com.copadomorro.copadomorro.exceptions.UserServiceException;
 import br.com.copadomorro.copadomorro.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -19,53 +22,107 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public UserDTO insert(UserDTO userDTO) {
-        validateUser(userDTO);
-        User user = new User(userDTO);
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        User savedUser = userRepository.save(user);
-        if (savedUser == null) {
-            throw new RuntimeException("Error creating new user");
+    public UserViewDTO insert(UserDTO userDTO) {
+        try {
+            validateUser(userDTO);
+            User user = new User(userDTO);
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            User savedUser = userRepository.save(user);
+            return new UserViewDTO(savedUser);
+        } catch (Exception e) {
+            throw new UserServiceException("Erro ao criar novo usuário", e);
         }
-        return new UserDTO(savedUser);
     }
 
-    public List<UserDTO> findAll(){
-        List<User> users = userRepository.findAll();
-        return users.stream().map(UserDTO::new).toList();
+    public List<UserViewDTO> findAll() {
+        try {
+            List<User> users = userRepository.findAll();
+            return users.stream().map(UserViewDTO::new).collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new UserServiceException("Erro ao buscar todos os usuários", e);
+        }
     }
 
-    public UserDTO update(UserDTO userDTO) {
-        User user = new User(userDTO);
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        return new UserDTO(userRepository.save(user));
+
+    public UserViewDTO update(UserDTO userDTO) {
+        try {
+            User user = new User(userDTO);
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            return new UserViewDTO(userRepository.save(user));
+        } catch (Exception e) {
+            throw new UserServiceException("Erro ao atualizar usuário", e);
+        }
     }
 
     public void delete(Long id) {
-        User user = userRepository.findById(id).get();
-        userRepository.delete(user);
+        try {
+            User user = userRepository.findById(id).orElseThrow(() -> new UserServiceException("Usuário não encontrado para o ID: " + id));
+            userRepository.delete(user);
+        } catch (Exception e) {
+            throw new UserServiceException("Erro ao excluir usuário", e);
+        }
     }
 
-    public UserDTO findById(Long id) {
-        return new UserDTO(userRepository.findById(id).get());
+    public UserViewDTO findById(Long id) {
+        try {
+            User user = userRepository.findById(id).orElseThrow(() -> new UserServiceException("Usuário não encontrado para o ID: " + id));
+            return new UserViewDTO(user);
+        } catch (Exception e) {
+            throw new UserServiceException("Erro ao buscar usuário por ID", e);
+        }
     }
 
-    public UserDTO findByEmail(String email) {
-        return new UserDTO(userRepository.findByEmail(email).get());
+    public UserViewDTO findByEmail(String email) {
+        try {
+            User user = userRepository.findByEmail(email).orElseThrow(() -> new UserServiceException("Usuário não encontrado para o e-mail: " + email));
+            return new UserViewDTO(user);
+        } catch (Exception e) {
+            throw new UserServiceException("Erro ao buscar usuário por e-mail", e);
+        }
+    }
+
+    public UserViewDTO findByCpf(String cpf) {
+        try {
+            User user = userRepository.findByCpf(cpf).orElseThrow(() -> new UserServiceException("Usuário não encontrado para o cpf: " + cpf));
+            return new UserViewDTO(user);
+        } catch (Exception e) {
+            throw new UserServiceException("Erro ao buscar usuário por cpf", e);
+        }
+    }
+
+    public UserViewDTO findByCnpj(String cnpj) {
+        try {
+            User user = userRepository.findByCpf(cnpj).orElseThrow(() -> new UserServiceException("Usuário não encontrado para o cnpj: " + cnpj));
+            return new UserViewDTO(user);
+        } catch (Exception e) {
+            throw new UserServiceException("Erro ao buscar usuário por cnpj", e);
+        }
     }
 
     private void validateUser(UserDTO user) {
         if (user == null || hasInvalidField(user)) {
-            throw new IllegalArgumentException("Invalid user data");
+            throw new UserServiceException("Dados de usuário inválidos");
+        }
+
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new UserServiceException("E-mail já cadastrado: " + user.getEmail());
+        }
+
+        if (!isNullOrEmpty(user.getCpf()) && userRepository.findByCpf(user.getCpf()).isPresent()) {
+            throw new UserServiceException("Cpf já cadastrado: " + user.getCpf());
+        }
+
+        if (!isNullOrEmpty(user.getCnpj()) && userRepository.findByCnpj(user.getCnpj()).isPresent()) {
+            throw new UserServiceException("Cnpj já cadastrado: " + user.getCnpj());
         }
     }
 
     private boolean hasInvalidField(UserDTO userDTO) {
         if (isNullOrEmpty(userDTO.getName())
-            || isNullOrEmpty(userDTO.getEmail())
-            || isNullOrEmpty(userDTO.getPassword())
-            || isNullOrEmpty(userDTO.getType())
-            || (isNullOrEmpty(userDTO.getCnpj()) && isNullOrEmpty(userDTO.getCpf()))) {
+                || isNullOrEmpty(userDTO.getEmail())
+                || isNullOrEmpty(userDTO.getPassword())
+                || isNullOrEmpty(userDTO.getType())
+                || (isNullOrEmpty(userDTO.getCnpj()) && isNullOrEmpty(userDTO.getCpf()))) {
             return true;
         }
         return false;
