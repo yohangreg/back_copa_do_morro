@@ -53,6 +53,7 @@ Contribuições são bem-vindas! Se você deseja contribuir com a aplicação, p
 4. Faça o push para a branch (`git push origin feature/nova-funcionalidade`).
 5. Crie um novo Pull Request.
 
+
 ---
 
 Para mais informações sobre como utilizar a API backend da Copa do Morro, consulte a documentação ou entre em contato com a equipe de desenvolvimento.
