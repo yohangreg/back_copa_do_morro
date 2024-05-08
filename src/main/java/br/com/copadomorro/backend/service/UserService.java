@@ -42,16 +42,30 @@ public class UserService {
         }
     }
 
-
     public UserViewDTO update(UserDTO userDTO) {
         try {
-            User user = new User(userDTO);
-            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-            return new UserViewDTO(userRepository.save(user));
+            // Verifica se o usuário existe pelo e-mail
+            User existingUser = userRepository.findByEmail(userDTO.getEmail()).get();
+            if (existingUser == null) {
+                throw new UserServiceException("Usuário não encontrado para o e-mail fornecido: " + userDTO.getEmail());
+            }
+
+            // Atualiza os campos do usuário com os valores do DTO, exceto a senha
+            existingUser.setName(userDTO.getName());
+            existingUser.setCpf(userDTO.getCpf());
+            existingUser.setCnpj(userDTO.getCnpj());
+            existingUser.setType(userDTO.getType());
+
+            // Salva as alterações no usuário
+            User updatedUser = userRepository.save(existingUser);
+
+            // Retorna uma visualização do usuário atualizado
+            return new UserViewDTO(updatedUser);
         } catch (Exception e) {
             throw new UserServiceException("Erro ao atualizar usuário", e);
         }
     }
+
 
     public void delete(Long id) {
         try {
