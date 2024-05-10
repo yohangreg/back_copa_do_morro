@@ -1,6 +1,7 @@
 package br.com.copadomorro.backend.entity;
 
 import br.com.copadomorro.backend.dto.UserDTO;
+import br.com.copadomorro.backend.entity.enums.UserSituationType;
 import jakarta.persistence.*;
 import org.springframework.beans.BeanUtils;
 
@@ -12,13 +13,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false)
     private String name;
 
     @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "password_hash")
+    @Column(name = "password_hash", nullable = false)
     private String password;
 
     @Column(name = "cpf")
@@ -29,6 +30,10 @@ public class User {
 
     @Column(name = "type")
     private String type;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "situationType", nullable = false)
+    private UserSituationType situationType;
 
     public User(UserDTO userDTO) {
         BeanUtils.copyProperties(userDTO, this);
@@ -91,5 +96,13 @@ public class User {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public UserSituationType getSituationType() {
+        return situationType;
+    }
+
+    public void setSituationType(UserSituationType situationType) {
+        this.situationType = situationType;
     }
 }

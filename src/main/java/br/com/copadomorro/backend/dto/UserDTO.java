@@ -1,6 +1,7 @@
 package br.com.copadomorro.backend.dto;
 
 import br.com.copadomorro.backend.entity.User;
+import br.com.copadomorro.backend.entity.enums.UserSituationType;
 import org.springframework.beans.BeanUtils;
 
 public class UserDTO {
@@ -12,6 +13,7 @@ public class UserDTO {
     private String cpf;
     private String cnpj;
     private String type;
+    private UserSituationType situationType;
 
     public UserDTO(User user) {
         BeanUtils.copyProperties(user, this);
@@ -74,5 +76,13 @@ public class UserDTO {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public UserSituationType getSituationType() {
+        return situationType;
+    }
+
+    public void setSituationType(UserSituationType situationType) {
+        this.situationType = situationType;
     }
 }
