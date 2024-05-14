@@ -44,7 +44,6 @@ public class UserService {
 
     public UserViewDTO update(UserDTO userDTO) {
         try {
-            // Verifica se o usuário existe pelo e-mail
             User existingUser = userRepository.findByEmail(userDTO.getEmail()).get();
             if (existingUser == null) {
                 throw new UserServiceException("Usuário não encontrado para o e-mail fornecido: " + userDTO.getEmail());

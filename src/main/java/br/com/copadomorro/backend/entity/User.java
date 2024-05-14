@@ -32,7 +32,7 @@ public class User {
     private String type;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "situationType", nullable = false)
+    @Column(name = "situation_type", nullable = false)
     private UserSituationType situationType;
 
     public User(UserDTO userDTO) {
