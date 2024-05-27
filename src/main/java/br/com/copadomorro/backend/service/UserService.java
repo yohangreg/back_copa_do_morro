@@ -1,8 +1,10 @@
 package br.com.copadomorro.backend.service;
 
 import br.com.copadomorro.backend.dto.UserDTO;
+import br.com.copadomorro.backend.dto.UserUpdateDTO;
 import br.com.copadomorro.backend.dto.UserViewDTO;
 import br.com.copadomorro.backend.entity.User;
+import br.com.copadomorro.backend.entity.enums.UserSituationType;
 import br.com.copadomorro.backend.exceptions.UserServiceException;
 import br.com.copadomorro.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ public class UserService {
             validateUser(userDTO);
             User user = new User(userDTO);
             user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            user.setSituationType(UserSituationType.PENDING);
+            user.setId(null);
             User savedUser = userRepository.save(user);
             return new UserViewDTO(savedUser);
         } catch (Exception e) {
@@ -42,7 +46,7 @@ public class UserService {
         }
     }
 
-    public UserViewDTO update(UserDTO userDTO) {
+    public UserViewDTO update(UserUpdateDTO userDTO) {
         try {
             User existingUser = userRepository.findByEmail(userDTO.getEmail()).get();
             if (existingUser == null) {

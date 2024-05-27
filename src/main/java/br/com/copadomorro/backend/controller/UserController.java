@@ -1,6 +1,7 @@
 package br.com.copadomorro.backend.controller;
 
 import br.com.copadomorro.backend.dto.UserDTO;
+import br.com.copadomorro.backend.dto.UserUpdateDTO;
 import br.com.copadomorro.backend.dto.UserViewDTO;
 import br.com.copadomorro.backend.exceptions.UserServiceException;
 import br.com.copadomorro.backend.service.UserService;
@@ -32,7 +33,7 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> updateUser(@RequestBody UserUpdateDTO userDTO) {
         try {
             UserViewDTO userUpdated = userService.update(userDTO);
             return ResponseEntity.status(HttpStatus.OK).body(userUpdated);
