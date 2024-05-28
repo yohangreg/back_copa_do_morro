@@ -1,7 +1,6 @@
 package br.com.copadomorro.backend.entity;
 
 import br.com.copadomorro.backend.dto.DwDTO;
-import br.com.copadomorro.backend.dto.UserDTO;
 import jakarta.persistence.*;
 import org.springframework.beans.BeanUtils;
 
@@ -12,7 +11,7 @@ import java.util.Date;
 public class Dw {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nome_jogador", nullable = false)
@@ -22,6 +21,7 @@ public class Dw {
     private String cpfJogador;
 
     @Column(name = "data_nascimento_jogador", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date dataNascimentoJogador;
 
     @Column(name = "estado_jogador", nullable = false)
@@ -37,6 +37,7 @@ public class Dw {
     private String nomeJogo;
 
     @Column(name = "data_jogo", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date dataJogo;
 
     @Column(name = "estado_jogo", nullable = false)

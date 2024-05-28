@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/auth")
+@RequestMapping(value = "/api/auth")
 @CrossOrigin
 public class AuthController {
 
@@ -22,7 +22,7 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/SingUp")
+    @PostMapping(value = "/singUp")
     public ResponseEntity<?> insertNewUser(@RequestBody UserDTO newUser) {
         try {
             UserViewDTO userInsert = userService.insert(newUser);

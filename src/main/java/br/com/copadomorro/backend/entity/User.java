@@ -5,6 +5,8 @@ import br.com.copadomorro.backend.entity.enums.UserSituationType;
 import jakarta.persistence.*;
 import org.springframework.beans.BeanUtils;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -34,6 +36,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "situation_type", nullable = false)
     private UserSituationType situationType;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Document> documents;
 
     public User(UserDTO userDTO) {
         BeanUtils.copyProperties(userDTO, this);
@@ -104,5 +109,13 @@ public class User {
 
     public void setSituationType(UserSituationType situationType) {
         this.situationType = situationType;
+    }
+
+    public List<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
     }
 }
