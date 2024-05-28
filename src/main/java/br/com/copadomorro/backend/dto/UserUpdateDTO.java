@@ -4,29 +4,17 @@ import br.com.copadomorro.backend.entity.User;
 import br.com.copadomorro.backend.entity.enums.UserSituationType;
 import org.springframework.beans.BeanUtils;
 
-public class UserDTO {
+public class UserUpdateDTO {
 
-    private Long id;
-    private String name;
     private String email;
+    private String name;
     private String password;
     private String cpf;
     private String cnpj;
     private String type;
 
-    public UserDTO(User user) {
+    public UserUpdateDTO(User user) {
         BeanUtils.copyProperties(user, this);
-    }
-
-    public UserDTO() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -35,14 +23,6 @@ public class UserDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {
@@ -75,5 +55,13 @@ public class UserDTO {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
